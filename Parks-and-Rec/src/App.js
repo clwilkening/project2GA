@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {BrowserRouter, Match, Miss } from 'react-router';
 import './App.css';
 import axios from 'axios';
+import Header from './components/Header';
 
 class App extends Component {
   constructor() {
@@ -78,7 +80,7 @@ class App extends Component {
         <h4 key={key}>{song.title}</h4>
         <button>Edit Name</button>
         <button>Edit Song</button>
-        <p>&#x1F5D1;</p>
+        <p onClick={ () => { this.deleteSong(key)}}>&times;</p>
         </div>
       );
     };
@@ -95,23 +97,39 @@ class App extends Component {
     //I tried the above way and could not return more than one element. Tried with braces and wrapping in div.
   }
 
-  deleteSong() {
-
+  deleteSong(songKey) {
+    axios({
+      url: `/songs/${songKey}.json`,
+      baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
+      method: "DELETE"
+    }).then((response) => {
+      let songs = {...this.state.songs};
+      delete songs[songKey];
+      this.setState({ songs, });
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Parks and Rec.</h2>
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <Match
+            exactly pattern="/"
+            component= () => <Home
+              songs={this.state.songs}
+              getSongs={this.getSongs} />
+        <input
+          className="title-input"
+          placeholder="Name your song!"
+          onKeyPress={this.handleNewSongInput}
+          ref="input"
+        /><button onClick={() => {this.createSongTitle(this.refs.input.value)}}>Create!</button>
+        {this.renderSongs()}
         </div>
-      <input
-        className="title-input"
-        placeholder="Name your song!"
-        onKeyPress={this.handleNewSongInput}
-      />
-      {this.renderSongs()}
-      </div>
+      </BrowserRouter>
     );
   }
 }
