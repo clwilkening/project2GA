@@ -5,7 +5,8 @@ const propTypes = {
   getSongs: React.PropTypes.func.isRequired,
   songs: React.PropTypes.object.isRequired,
   setEditSongState: React.PropTypes.func.isRequired,
-}
+  //currentEditSong: React.PropTypes.string.isRequired,
+};
 
 class Home extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Home extends Component {
     this.createSongTitle = this.createSongTitle.bind(this);
     this.renderSongs = this.renderSongs.bind(this);
     this.deleteSong = this.deleteSong.bind(this);
+    this.renderEditOrTitle = this.renderEditOrTitle.bind(this);
   }
 
   createSongTitle(titleText) {
@@ -47,7 +49,6 @@ class Home extends Component {
 
   renderSongs() {
     let songElements = [];
-    let editSongElements = [];
 
     for(let key in this.props.songs) {
       let song = this.props.songs[key]
@@ -56,29 +57,73 @@ class Home extends Component {
         <div>
           <div key={key}>
             <h4>{song.title}</h4>
-            <button onClick={() => this.handleClickEdit(key) }>Edit Name</button>
+            <button onClick={ () =>
+              this.handleClickEdit(key) }
+              //this.renderEditOrTitle(key) }
+              >Edit Name</button>
           </div>
         <button>Edit Song</button>
-        <p onClick={ () => { this.deleteSong(key)}}>&times;</p>
+        <p onClick={ () => { this.deleteSong(key)} }>&times;</p>
         </div>
       );
-
-      editSongElements.push(
-        <div>
-          <div key={key}>
-            <h4>{song.title}</h4>
-            <button>Edit Name</button>
-          </div>
-        <button>Edit Song</button>
-        <p onClick={ () => { this.deleteSong(key)}}>&times;</p>
-        </div>
-      );
+      songElements.reverse();
+      // editSongElements.push(
+      //   <div>
+      //     <div key={key}>
+      //       <input type="text" defaultValue={song.title} ref="editSongInput"></input>
+      //       <button>Save Name</button>
+      //     </div>
+      //   </div>
+      //);
     };
     return(
       <div>
         {songElements}
       </div>
     );
+  }
+
+  renderEditOrTitle(key) {
+    //this.props.setEditSongState(key)
+    //this.handleClickEdit(key);
+    //this.setState({ currentEditSong: key})
+    //if(this.state.currentEditSong === key) {
+    let content;
+
+    if (!this.props.currentEditSong) {
+    let currentSong = this.props.songs[this.props.currentEditSong];
+      if(!this.props.edit) {
+        content = (
+          <div>
+            {this.renderSongs()}
+          </div>
+        );
+      }
+    } else {
+      content = (
+        <div>
+          <div key={key}>
+            <input type="text" defaultValue={this.props.songs[this.props.currentEditSong].title} ref="editSongInput" />
+            <button
+              onClick={() => {this.saveSongName()}}
+            >
+              Save Name
+            </button>
+          </div>
+        </div>
+      )
+    }
+    return content;
+      // return(
+      //   <div>
+      //     <div key={key}>
+      //       <input type="text" defaultValue={this.props.songs[key].title} ref="editSongInput"></input>
+      //       <button>Save Name</button>
+      //     </div>
+      //   </div>
+      // )
+      // console.log(key);
+    //}
   }
 
   deleteSong(songKey) {
@@ -98,9 +143,32 @@ class Home extends Component {
 
   handleClickEdit(songKey) {
     this.props.setEditSongState(songKey)
+    //return songKey;
   }
-  editSongName(songKey) {
 
+  saveSongName() {
+    let key = this.props.currentEditSong;
+    console.log(key)
+    let currentSong = this.props.songs[key];
+    console.log(currentSong)
+    currentSong.title = this.refs.editSongInput.value;
+    console.log(currentSong.title)
+
+    axios({
+      url: `/songs/${key}.json`,
+      baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
+      method: "PATCH",
+      data: currentSong,
+    }).then((response) => {
+      let songs = this.props.songs;
+      songs[key] = currentSong;
+      this.props.setEditFalse();
+      this.props.setSongState(songs);
+      //this.props.getSongs();
+       this.renderEditOrTitle();
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   render(){
@@ -112,13 +180,24 @@ class Home extends Component {
           onKeyPress={this.handleNewSongInput}
           ref="input"
         />
-        <button onClick={() => {this.createSongTitle(this.refs.input.value)}}>Create!</button>
-        {this.renderSongs()}
+        <button onClick={() =>
+          {this.createSongTitle(this.refs.input.value)}}
+        >
+          Create!
+        </button>
+        {this.renderEditOrTitle()}
       </div>
-    )
+    );
   }
 }
 
 Home.propTypes = propTypes;
 
 export default Home;
+
+
+
+
+
+
+
