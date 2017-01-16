@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+//import { Link } from 'react-router';
 import axios from 'axios';
 
 const propTypes = {
   getSongs: React.PropTypes.func.isRequired,
-  songs: React.PropTypes.object.isRequired,
+  //songs: React.PropTypes.object.isRequired,
   setEditSongState: React.PropTypes.func.isRequired,
   //currentEditSong: React.PropTypes.string.isRequired,
 };
@@ -20,7 +21,12 @@ class Home extends Component {
   }
 
   createSongTitle(titleText) {
-    let newTitle = { title: titleText, box: false }
+    let newTitle = {
+      title: titleText,
+      box1: false,
+      box2: false,
+      box3: false,
+    }
 
     axios({
       url: '/songs.json',
@@ -62,20 +68,12 @@ class Home extends Component {
               //this.renderEditOrTitle(key) }
               >Edit Name</button>
           </div>
-        <button>Edit Song</button>
-        <p onClick={ () => { this.deleteSong(key)} }>&times;</p>
+          <button key={song.title} onClick={ () => this.props.setCurrentSong(key)} >Edit Song</button>
+          <p onClick={ () => { this.deleteSong(key)} }>&times;</p>
         </div>
-      );
-      songElements.reverse();
-      // editSongElements.push(
-      //   <div>
-      //     <div key={key}>
-      //       <input type="text" defaultValue={song.title} ref="editSongInput"></input>
-      //       <button>Save Name</button>
-      //     </div>
-      //   </div>
-      //);
-    };
+        );
+        songElements.reverse();
+      };
     return(
       <div>
         {songElements}
@@ -91,7 +89,7 @@ class Home extends Component {
     let content;
 
     if (!this.props.currentEditSong) {
-    let currentSong = this.props.songs[this.props.currentEditSong];
+    //let currentSong = this.props.songs[this.props.currentEditSong];
       if(!this.props.edit) {
         content = (
           <div>
@@ -114,16 +112,6 @@ class Home extends Component {
       )
     }
     return content;
-      // return(
-      //   <div>
-      //     <div key={key}>
-      //       <input type="text" defaultValue={this.props.songs[key].title} ref="editSongInput"></input>
-      //       <button>Save Name</button>
-      //     </div>
-      //   </div>
-      // )
-      // console.log(key);
-    //}
   }
 
   deleteSong(songKey) {
@@ -165,7 +153,7 @@ class Home extends Component {
       this.props.setEditFalse();
       this.props.setSongState(songs);
       //this.props.getSongs();
-       this.renderEditOrTitle();
+      this.renderEditOrTitle();
     }).catch((error) => {
       console.log(error);
     });

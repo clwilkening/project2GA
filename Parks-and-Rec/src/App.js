@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Match, Miss } from 'react-router';
+//import {BrowserRouter, Match } from 'react-router';
 import axios from 'axios';
 import Header from './components/Header';
 import Home from './components/Home';
+import EditSong from './components/EditSong';
 //import {Link} from 'react-router';
 import './App.css';
 
@@ -12,13 +13,20 @@ class App extends Component {
 
     this.state = {
       //currentEditSong: null,
-      songs: {}
+      songs: {},
     };
 
     this.getSongs = this.getSongs.bind(this);
     this.setSongState = this.setSongState.bind(this);
     this.setEditSongState = this.setEditSongState.bind(this);
     this.setEditFalse = this.setEditFalse.bind(this);
+    this.setCurrentSong = this.setCurrentSong.bind(this);
+    this.box1True = this.box1True.bind(this);
+    this.box2True = this.box2True.bind(this);
+    this.box3True = this.box3True.bind(this);
+    this.box1False = this.box1False.bind(this);
+    this.box2False = this.box2False.bind(this);
+    this.box3False = this.box3False.bind(this);
     // this.handleNewSongInput = this.handleNewSongInput.bind(this);
     // this.createSongTitle = this.createSongTitle.bind(this);
     // this.renderSongs = this.renderSongs.bind(this);
@@ -31,7 +39,7 @@ class App extends Component {
   }
 
   getSongs() {
-    console.log(this.state)
+    //console.log(this.state)
     axios({
       url: '/songs.json',
       baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
@@ -46,6 +54,12 @@ class App extends Component {
     }).catch((error) =>{
       console.log(error);
     });
+  }
+
+  setCurrentSong(key){
+    this.setState({
+      currentSong: key,
+    })
   }
 
   setSongState(songs) {
@@ -68,27 +82,155 @@ class App extends Component {
     })
   }
 
+  box1True(id, title, b1, b2, b3){
+    console.log(id, title, b1, b2, b3)
+    let newTitle = {
+      title: title,
+      box1: true,
+      box2: b2,
+      box3: b3,
+    }
+    axios({
+      url: `/songs/${id}.json`,
+      baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
+      method: "PATCH",
+      data: newTitle
+    }).then((response) => {
+      this.getSongs();
+      //console.log(response)
+      // let songs = {...this.props.songs};
+      // //console.log(songs);
+      // let songTitleId = response.data.name
+      // songs[songTitleId] = newTitle;
+      // this.setSongState(songs);
+      //this.setState({ songs, });
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+    box1False(id, title, b1, b2, b3){
+    console.log(id, title, b1, b2, b3)
+    let newTitle = {
+      title: title,
+      box1: false,
+      box2: b2,
+      box3: b3,
+    }
+    axios({
+      url: `/songs/${id}.json`,
+      baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
+      method: "PATCH",
+      data: newTitle
+    }).then((response) => {
+      this.getSongs();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  box2True(id, title, b1, b2, b3){
+    console.log(id, title)
+    let newTitle = {
+      title: title,
+      box1: b1,
+      box2: true,
+      box3: b3,
+    }
+    axios({
+      url: `/songs/${id}.json`,
+      baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
+      method: "PATCH",
+      data: newTitle
+    }).then((response) => {
+      this.getSongs();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+    box2False(id, title, b1, b2, b3){
+    console.log(id, title, b1, b2, b3)
+    let newTitle = {
+      title: title,
+      box1: b1,
+      box2: false,
+      box3: b3,
+    }
+    axios({
+      url: `/songs/${id}.json`,
+      baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
+      method: "PATCH",
+      data: newTitle
+    }).then((response) => {
+      this.getSongs();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+  box3True(id, title, b1, b2, b3){
+    console.log(id, title)
+    let newTitle = {
+      title: title,
+      box1: b1,
+      box2: b2,
+      box3: true,
+    }
+    axios({
+      url: `/songs/${id}.json`,
+      baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
+      method: "PATCH",
+      data: newTitle
+    }).then((response) => {
+      this.getSongs();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+  box3False(id, title, b1, b2, b3){
+    console.log(id, title, b1, b2, b3)
+    let newTitle = {
+      title: title,
+      box1: b1,
+      box2: b2,
+      box3: false,
+    }
+    axios({
+      url: `/songs/${id}.json`,
+      baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
+      method: "PATCH",
+      data: newTitle
+    }).then((response) => {
+      this.getSongs();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
   render() {
     return (
-      <BrowserRouter>
         <div className="App">
           <Header />
           <div className="main">
-          <Match
-            exactly pattern="/"
-            component={ () =>
               <Home
-              songs={this.state.songs}
-              getSongs={this.getSongs}
-              setSongState={this.setSongState}
-              setEditSongState={this.setEditSongState}
-              currentEditSong={this.state.currentEditSong}
-              setEditFalse={this.setEditFalse}
-              />}
-          />
+                songs={this.state.songs}
+                getSongs={this.getSongs}
+                setSongState={this.setSongState}
+                setEditSongState={this.setEditSongState}
+                currentEditSong={this.state.currentEditSong}
+                setEditFalse={this.setEditFalse}
+                setCurrentSong={this.setCurrentSong}
+              />
+              <EditSong
+                songs={this.state.songs}
+                currentSong={this.state.currentSong}
+                box1True={this.box1True}
+                box2True={this.box2True}
+                box3True={this.box3True}
+                box1False={this.box1False}
+                box2False={this.box2False}
+                box3False={this.box3False}
+              />
         </div>
         </div>
-      </BrowserRouter>
     );
   }
 }
