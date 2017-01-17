@@ -21,3 +21,29 @@
 .box{
   border: 1px solid navy;
 }
+
+.title-input{
+  line-height: 40px;
+}
+
+.create-title{
+  line-height: 40px;
+}
+
+.song-name-container{
+  background: lightgrey;
+  width: 100%;
+}
+
+.song-title{
+  width: 100%;
+}
+
+
+.rename{
+  line-height: 40px;
+}
+
+.buttons {
+  line-height: 40px;
+}
