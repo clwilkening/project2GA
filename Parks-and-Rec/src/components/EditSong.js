@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import simonHarp1 from '../media/simonHarp1.mp3';
+//import simonHarp1 from '../media/simonHarp1.mp3';
+//import simonHarp2 from '../media/simonHarp2.mp3';
+import ParksAndRecOboe from '../media/ParksAndRecOboe.mp3';
+import ParksAndRecTpt from '../media/ParksAndRecTpt.mp3';
+import ParksAndRecViolin from '../media/ParksAndRecViolin.mp3';
 //import axios from 'axios';
 
 class EditSong extends Component {
@@ -20,10 +24,20 @@ class EditSong extends Component {
   //I need to object.keys on the clicked song name in order to render the divs with an appropriate key.
 
   playAudio() {
-    const audio = this.refs.audio1
-  if(this.props.songs[this.props.currentSong].box1 === true) {
-    audio.currentTime = 0;
-    audio.play();
+    const audio1 = this.refs.audio1
+    const audio2 = this.refs.audio2
+    const audio3 = this.refs.audio3
+    if(this.props.songs[this.props.currentSong].box1 === true) {
+      audio1.currentTime = 0;
+      audio1.play();
+    }
+    if(this.props.songs[this.props.currentSong].box2 === true){
+      audio2.currentTime=0;
+      audio2.play();
+    }
+    if(this.props.songs[this.props.currentSong].box3 === true){
+      audio3.currentTime=0;
+      audio3.play();
     }
   }
 
@@ -41,19 +55,19 @@ class EditSong extends Component {
           <div
             className="box box-1"
             onClick={() => this.toggleBox1(this.props.currentSong, currentSong.title)}
-          ><audio ref="audio1" src={simonHarp1} preload="auto"></audio>
+          ><audio ref="audio1" src={ParksAndRecOboe} preload="auto"></audio>
             I am a box
           </div>
           <div
             className="box box-2"
             onClick={() => this.toggleBox2(this.props.currentSong, currentSong.title, currentSong.box1, currentSong.box2, currentSong.box3)}
-          >
+          ><audio ref="audio2" src={ParksAndRecTpt} preload="auto"></audio>
             I am also a box
           </div>
           <div
             className="box box-3"
             onClick={() => this.toggleBox3(this.props.currentSong, currentSong.title, currentSong.box1, currentSong.box2, currentSong.box3)}
-          >
+          ><audio ref="audio3" src={ParksAndRecViolin} preload="auto"></audio>
             I am the best box
           </div>
           <button onClick={() => this.playAudio()}>

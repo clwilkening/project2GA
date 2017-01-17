@@ -27,6 +27,7 @@ class App extends Component {
     this.box1False = this.box1False.bind(this);
     this.box2False = this.box2False.bind(this);
     this.box3False = this.box3False.bind(this);
+    this.getRonSwansonQuote = this.getRonSwansonQuote.bind(this);
     // this.handleNewSongInput = this.handleNewSongInput.bind(this);
     // this.createSongTitle = this.createSongTitle.bind(this);
     // this.renderSongs = this.renderSongs.bind(this);
@@ -36,6 +37,19 @@ class App extends Component {
 
   componentDidMount() {
     this.getSongs();
+    this.getRonSwansonQuote();
+  }
+
+  getRonSwansonQuote(){
+    axios.get(`http://ron-swanson-quotes.herokuapp.com/v2/quotes/`)
+      .then((response) => {
+        console.log(response.data)
+        this.setState({
+          ronSwanson: response.data[0]
+        })
+      }).catch((error) => {
+        console.log(error)
+      });
   }
 
   getSongs() {
@@ -208,7 +222,7 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-          <Header />
+          <Header ronSwanson={this.state.ronSwanson} />
           <div className="main">
               <Home
                 songs={this.state.songs}
