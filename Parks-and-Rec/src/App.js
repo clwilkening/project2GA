@@ -41,18 +41,15 @@ class App extends Component {
     this.box8False = this.box8False.bind(this);
     this.toggleAudioStateTrue = this.toggleAudioStateTrue.bind(this);
     this.toggleAudioStateFalse = this.toggleAudioStateFalse.bind(this);
-    // this.handleNewSongInput = this.handleNewSongInput.bind(this);
-    // this.createSongTitle = this.createSongTitle.bind(this);
-    // this.renderSongs = this.renderSongs.bind(this);
-    // this.deleteSong = this.deleteSong.bind(this);
-
   }
 
+//get's the song states from firebase and calls the Ron Swanson API
   componentDidMount() {
     this.getSongs();
     this.getRonSwansonQuote();
   }
 
+//Ron swanson API, returns an array with one string.
   getRonSwansonQuote(){
     axios.get(`http://ron-swanson-quotes.herokuapp.com/v2/quotes/`)
       .then((response) => {
@@ -65,6 +62,7 @@ class App extends Component {
       });
   }
 
+//gets the song states from firebase
   getSongs() {
     //console.log(this.state)
     axios({
@@ -83,24 +81,28 @@ class App extends Component {
     });
   }
 
+//sets the current state of current song from Home.js, when element is clicked.
   setCurrentSong(key){
     this.setState({
       currentSong: key,
     })
   }
 
+//removes the current song state from Home.js
   removeCurrentSong() {
     this.setState({
       currentSong: ""
     })
   }
 
+//sets the song state with title, and box booleans.
   setSongState(songs) {
     this.setState({
       songs: songs
     })
   }
 
+//If edit is true, an input box will render. This is to edit a title
   setEditSongState(songKey) {
     this.setState({
       currentEditSong: songKey,
@@ -108,6 +110,7 @@ class App extends Component {
     })
   }
 
+//turns off the edit option
   setEditFalse() {
     this.setState({
       currentEditSong: "",
@@ -115,9 +118,12 @@ class App extends Component {
     })
   }
 
+//box(int)True and boxFalse set the state of boxes that have been clicked. When editing a song,
+//a clicked box from EditSong.js sets the state to true/false, and calls these functions to do so.
+//the id is needed to patch the new information to the correct key in firebase
   box1True(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: true,
       box2: b2,
@@ -135,20 +141,13 @@ class App extends Component {
       data: newTitle
     }).then((response) => {
       this.getSongs();
-      //console.log(response)
-      // let songs = {...this.props.songs};
-      // //console.log(songs);
-      // let songTitleId = response.data.name
-      // songs[songTitleId] = newTitle;
-      // this.setSongState(songs);
-      //this.setState({ songs, });
     }).catch((error) => {
       console.log(error);
     });
   }
     box1False(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: false,
       box2: b2,
@@ -173,7 +172,7 @@ class App extends Component {
 
   box2True(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: true,
@@ -195,9 +194,10 @@ class App extends Component {
       console.log(error);
     });
   }
+
     box2False(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: false,
@@ -219,9 +219,10 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box3True(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
@@ -243,9 +244,10 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box3False(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
@@ -267,9 +269,10 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box4True(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
@@ -291,13 +294,14 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box4False(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
-      box3: b4,
+      box3: b3,
       box4: false,
       box5: b5,
       box6: b6,
@@ -315,9 +319,10 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box5True(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
@@ -328,6 +333,7 @@ class App extends Component {
       box7: b7,
       box8: b8,
     }
+
     axios({
       url: `/songs/${id}.json`,
       baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
@@ -339,13 +345,14 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box5False(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
-      box3: b4,
+      box3: b3,
       box4: b4,
       box5: false,
       box6: b6,
@@ -363,9 +370,10 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box6True(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
@@ -387,13 +395,14 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box6False(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
-      box3: b4,
+      box3: b3,
       box4: b4,
       box5: b5,
       box6: false,
@@ -411,9 +420,10 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box7True(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
@@ -435,13 +445,14 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box7False(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
-      box3: b4,
+      box3: b3,
       box4: b4,
       box5: b5,
       box6: b6,
@@ -459,9 +470,10 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box8True(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
@@ -483,13 +495,14 @@ class App extends Component {
       console.log(error);
     });
   }
+
   box8False(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
     console.log(id, title, b1, b2, b3, b4, b5, b6, b7, b8)
-    let newTitle = {
+    const newTitle = {
       title: title,
       box1: b1,
       box2: b2,
-      box3: b4,
+      box3: b3,
       box4: b4,
       box5: b5,
       box6: b6,
@@ -511,12 +524,13 @@ class App extends Component {
   toggleAudioStateTrue(){
     this.setState({
       nowPlaying: true,
-    })
+    });
   }
+
   toggleAudioStateFalse(){
     this.setState({
       nowPlaying: false,
-    })
+    });
   }
 
   render() {

@@ -17,12 +17,12 @@ body{
   background-image: url('http://i.imgur.com/xp1utvj.jpg');
   width: 100%;
   height: auto;
-  /*background-size: cover;
-  background-repeat: no-repeat;*/
+
 }
 
 .header{
   font-family: 'Ubuntu', sans-serif;
+  padding-bottom: 11em;
 }
 
 .icon-border{
@@ -52,8 +52,24 @@ body{
 }
 
 .create-title{
-  line-height: 38px;
+  line-height: 40px;
   border: none;
+  margin: 10px;
+  background-color: rgba(133,175,75, 1);
+  color: white;
+}
+
+.edit-title{
+  line-height: 40px;
+  border: none;
+  margin: 10px;
+}
+
+.save-title{
+  background-color: rgba(133,175,75, 1);
+  border: none;
+  margin: 10px;
+  color: white;
 }
 
 .song-name-container{
@@ -127,5 +143,7 @@ body{
 
 .selected{
   background-color: rgba(240,240,240,.9);
-  border: 1px solid rgba(100,105,100, .9);
+  box-shadow: 1px 1px 1px rgba(133,175,75,1);
 }
+
+/*colors are green and grey*/
