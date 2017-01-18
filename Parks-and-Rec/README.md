@@ -4,7 +4,7 @@
 
 [Experience My Web App Here](https://build-uyopztecnr.now.sh)
 
-![An image of the application](http://i.imgur.com/GFYKAAP.png)
+![An image of the application](http://i.imgur.com/nrpFkYJ.png)
 
 ####Technologies
 
