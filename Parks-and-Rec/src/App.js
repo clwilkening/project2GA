@@ -51,7 +51,7 @@ class App extends Component {
 
 //Ron swanson API, returns an array with one string.
   getRonSwansonQuote(){
-    axios.get(`http://ron-swanson-quotes.herokuapp.com/v2/quotes/`)
+    axios.get(`https://ron-swanson-quotes.herokuapp.com/v2/quotes/`)
       .then((response) => {
         console.log(response.data)
         this.setState({
