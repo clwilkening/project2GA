@@ -10,13 +10,15 @@ class Header extends Component {
 
   render() {
     return(
-      <div className="App-header">
-        <h2>Parks and Rec.</h2>
-        <ul>
-          <li>
-            "{this.props.ronSwanson}" - Ron Swanson
-          </li>
-        </ul>
+      <div className="App-header header">
+        <h1>Parks and
+          Rec.
+          <div className="icon-border">
+            <div className="icon-inner">
+            </div>
+          </div>
+        </h1>
+        <h4>"{this.props.ronSwanson}" - <strong>Ron Swanson</strong></h4>
       </div>
     );
   }

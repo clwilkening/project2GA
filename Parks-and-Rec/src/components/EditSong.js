@@ -33,6 +33,7 @@ class EditSong extends Component {
 
   //I need to object.keys on the clicked song name in order to render the divs with an appropriate key.
 
+
   playAudio() {
     const audio1 = this.refs.audio1;
     const audio2 = this.refs.audio2;
@@ -102,78 +103,97 @@ class EditSong extends Component {
     let content;
     if(this.props.currentSong) {
       let currentSong = this.props.songs[this.props.currentSong];
-      console.log(currentSong.box2)
+      const key = this.props.currentSong
+      const title = currentSong.title
+      const  b1= currentSong.box1;
+      const  b2= currentSong.box2;
+      const  b3= currentSong.box3;
+      const  b4= currentSong.box4;
+      const  b5= currentSong.box5;
+      const  b6= currentSong.box6;
+      const  b7= currentSong.box7;
+      const  b8= currentSong.box8;
+      console.log(currentSong)
       content = (
-        <div className="row">
-          <div>
-          {currentSong.title}<button onClick={() => this.props.removeCurrentSong()}>&times; Hide</button>
+        <div className="col-sm-6 selected-container">
+          <div className="row">
+            <div className="col-sm-6">
+              <h3 className="current-song">{currentSong.title}</h3>
+            </div>
+            <div className="col-sm-4">
+            </div>
+            <div className="col-sm-2">
+            <button
+              className="x"
+              onClick={() => this.props.removeCurrentSong()}>&times;
+            </button>
+            </div>
           </div>
           <div className="box box-container">
-            <div>Melody</div>
+            <h4 className="description">Melody</h4>
+              <div
+                className={b1? "instruments col-sm-6 box box-1 selected" : "instruments col-sm-6 box box-1"}
+                onClick={() => this.toggleBox1(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
+              >
+              <audio ref="audio1" src={ParksAndRecOboe} preload="auto"></audio>
+               1: Oboe
+              </div>
+              <div
+                className={b2? "instruments col-sm-6 box box-2 selected" : "instruments col-sm-6 box box-2"}
+                onClick={() => this.toggleBox2(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
+              >
+              <audio ref="audio2" src={ParksAndRecTpt} preload="auto"></audio>
+                2: Trumpet
+              </div>
+            <h4 className="description">Accompaniment</h4>
             <div
-              className="box box-1"
-              onClick={() => this.toggleBox1(this.props.currentSong, currentSong.title,
-                currentSong.box1, currentSong.box2, currentSong.box3, currentSong.box4, currentSong.box5, currentSong.box6, currentSong.box7, currentSong.box8)}
-            ><audio ref="audio1" src={ParksAndRecOboe} preload="auto"></audio>
-             1: Oboe
-            </div>
-            <div
-              className="box box-2"
-              onClick={() => this.toggleBox2(this.props.currentSong, currentSong.title,
-                currentSong.box1, currentSong.box2, currentSong.box3, currentSong.box4, currentSong.box5, currentSong.box6, currentSong.box7, currentSong.box8)}
-            ><audio ref="audio2" src={ParksAndRecTpt} preload="auto"></audio>
-              2: Trumpet
-            </div>
-            <div>Accompaniment</div>
-            <div
-              className="box box-3"
-              onClick={() => this.toggleBox3(this.props.currentSong, currentSong.title,
-                currentSong.box1, currentSong.box2, currentSong.box3, currentSong.box4, currentSong.box5, currentSong.box6, currentSong.box7, currentSong.box8)}
-            ><audio ref="audio3" src={ParksAndRecViolin} preload="auto"></audio>
+              className={b3? "instruments col-sm-6 box box-3 selected" : "instruments col-sm-6 box box-3"}
+              onClick={() => this.toggleBox3(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
+            >
+            <audio ref="audio3" src={ParksAndRecViolin} preload="auto"></audio>
               3: Violin
             </div>
             <div
-              className="box box-4"
-              onClick={() => this.toggleBox4(this.props.currentSong, currentSong.title,
-                currentSong.box1, currentSong.box2, currentSong.box3, currentSong.box4, currentSong.box5, currentSong.box6, currentSong.box7, currentSong.box8)}
-            ><audio ref="audio4" src={ParksAndRecViola} preload="auto"></audio>
+              className={b4? "instruments col-sm-6 box box-4 selected" : "instruments col-sm-6 box box-4"}
+              onClick={() => this.toggleBox4(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
+            >
+            <audio ref="audio4" src={ParksAndRecViola} preload="auto"></audio>
              4: Viola
           </div>
-          <div>Bass</div>
+          <h4 className="description">Bass</h4>
           <div
-            className="box box-5"
-            onClick={() => this.toggleBox5(this.props.currentSong, currentSong.title,
-              currentSong.box1, currentSong.box2, currentSong.box3, currentSong.box4, currentSong.box5, currentSong.box6, currentSong.box7, currentSong.box8)}
-          ><audio ref="audio5" src={ParksAndRecCello} preload="auto"></audio>
+            className={b5? "instruments col-sm-6 box box-5 selected" : "instruments col-sm-6 box box-5"}
+            onClick={() => this.toggleBox5(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
+          >
+          <audio ref="audio5" src={ParksAndRecCello} preload="auto"></audio>
             5: Cello
           </div>
           <div
-            className="box box-6"
-            onClick={() => this.toggleBox6(this.props.currentSong, currentSong.title,
-              currentSong.box1, currentSong.box2, currentSong.box3, currentSong.box4, currentSong.box5, currentSong.box6, currentSong.box7, currentSong.box8)}
-          ><audio ref="audio6" src={ParksAndRecBass} preload="auto"></audio>
+            className={b6? "instruments col-sm-6 box box-6 selected" : "instruments col-sm-6 box box-6"}
+            onClick={() => this.toggleBox6(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
+          >
+          <audio ref="audio6" src={ParksAndRecBass} preload="auto"></audio>
             6: Bass
           </div>
-          <div>Percussion</div>
+          <h4 className="description">Percussion</h4>
           <div
-            className="box box-7"
-            onClick={() => this.toggleBox7(this.props.currentSong, currentSong.title,
-              currentSong.box1, currentSong.box2, currentSong.box3, currentSong.box4, currentSong.box5, currentSong.box6, currentSong.box7, currentSong.box8)}
-          ><audio ref="audio7" src={ParksAndRecSnare} preload="auto"></audio>
+            className={b7? "instruments col-sm-6 box box-7 selected" : "instruments col-sm-6 box box-7"}
+            onClick={() => this.toggleBox7(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
+          >
+          <audio ref="audio7" src={ParksAndRecSnare} preload="auto"></audio>
             7: Snare
           </div>
           <div
-            className="box box-8"
-            onClick={() => this.toggleBox8(this.props.currentSong, currentSong.title,
-              currentSong.box1, currentSong.box2, currentSong.box3, currentSong.box4, currentSong.box5, currentSong.box6, currentSong.box7, currentSong.box8)}
+            className={b8? "instruments col-sm-6 box box-8 selected" : "instruments col-sm-6 box box-8"}
+            onClick={() => this.toggleBox8(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
           ><audio ref="audio8" src={ParksAndRecKit} preload="auto"></audio>
             8: Drums
           </div>
-          <button onClick={() => this.playAudio()}>
-            PLAY
+          <button className="col-sm-6 buttons play-pause" onClick={() => this.playAudio()}>
+            <span className="glyphicon glyphicon-play"></span>PLAY
           </button>
-          <button onClick={() => this.stopAudio()}>
-            PAUSE
+          <button className="col-sm-6 buttons play-pause pause" onClick={() => this.stopAudio()}>
+            <span className="glyphicon glyphicon-stop"></span>STOP
           </button>
         </div>
       </div>

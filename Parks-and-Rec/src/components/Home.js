@@ -65,12 +65,12 @@ class Home extends Component {
       let song = this.props.songs[key]
 
       songElements.push(
-        <div className="song-name-container col-lg-12" key={key}>
+        <div className="song-name-container col-sm-12" key={key}>
           <div className="row">
-            <h4 className="col-lg-12 song-title">{song.title}</h4>
+            <h4 className="col-sm-12 song-title">{song.title}</h4>
           </div>
           <div className="row">
-          <button className="rename col-lg-4" onClick={ () =>
+          <button className="rename col-sm-4" onClick={ () =>
             this.handleClickEdit(key) }
             //this.renderEditOrTitle(key) }
           >
@@ -80,7 +80,7 @@ class Home extends Component {
           >
             Go!
           </button>
-          <button className="buttons col-lg-4" onClick={ () => { this.deleteSong(key)} }>&times;</button>
+          <button className="buttons col-lg-4" onClick={ () => { this.deleteSong(key)} }><span className="glyphicon glyphicon-trash"></span></button>
           </div>
         </div>
         );
@@ -100,7 +100,7 @@ class Home extends Component {
     //let currentSong = this.props.songs[this.props.currentEditSong];
       if(!this.props.edit) {
         content = (
-          <div className="row">
+          <div>
           <div className="col-sm-4">
             {this.renderSongs()}
           </div>
@@ -175,21 +175,21 @@ class Home extends Component {
       <div>
       <div className="row">
       <input
-          className="col-sm-4 title-input"
+          className="col-lg-4 title-input"
           placeholder="Name your song!"
           onKeyPress={this.handleNewSongInput}
           ref="input"
         />
         <button
-          className="col-sm-4 create-title"
+          className="col-lg-4 create-title"
           onClick={() =>{this.createSongTitle(this.refs.input.value)}}
         >
           Create!
         </button>
-        <div className="col-sm-4">
+        <div className="col-lg-4">
         </div>
       </div>
-      <div className="row">
+      <div>
         {this.renderEditOrTitle()}
       </div>
       </div>
@@ -200,8 +200,6 @@ class Home extends Component {
 Home.propTypes = propTypes;
 
 export default Home;
-
-
 
 
 

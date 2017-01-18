@@ -523,7 +523,7 @@ class App extends Component {
     return (
         <div className="App">
           <Header ronSwanson={this.state.ronSwanson} />
-          <div className="main">
+          <div className="row main">
               <Home
                 songs={this.state.songs}
                 getSongs={this.getSongs}
@@ -565,5 +565,3 @@ class App extends Component {
 }
 
 export default App;
-
-
