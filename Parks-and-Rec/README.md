@@ -8,7 +8,15 @@
 
 ####Technologies
 
-To make this application, I used React, Javascript, and Bootstrap. I incorporated a Firebase back end, axios, and a fun Ron Swanson API. I also used Finale Music and Logic to write the individual sound files.
+
+- React
+- Javascript
+- Bootstrap
+- Firebase
+- axios
+- Ron Swanson API
+
+This web-app has full CRUD functionality. I also used Finale Music and Logic to write the individual sound files.
 
 Take a look:
 
@@ -64,7 +72,7 @@ Take a look:
 
 ####My Approach
 
-I initially started with an idea an drew aspects of the plan on a whiteboard. Once I knew what direction to go in, I created a complete wireframe of the application. The wireframe goes through the user stories. I then added the users stores to a Trello board.
+I initially started with an idea an drew aspects of the plan on a whiteboard. Once I knew what direction to go in, I created a complete wireframe of the application. The wireframe goes through the user stories. I then added the users stories to a Trello board.
 
 [Wireframe](https://drive.google.com/drive/folders/0ByyiNgER-zrMU2ZLWC15eExRc0k?usp=sharing) 
 [Trello Board](https://trello.com/b/02S9WJqv/parks-and-rec)
