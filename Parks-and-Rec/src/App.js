@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-//import {BrowserRouter, Match } from 'react-router';
+import history from 'history';
 import axios from 'axios';
-//import bootstrap from 'bootstrap';
 import Header from './components/Header';
 import Home from './components/Home';
 import EditSong from './components/EditSong';
@@ -12,8 +11,8 @@ class App extends Component {
     super();
 
     this.state = {
-      //currentEditSong: null,
       songs: {},
+      nowPlaying: '',
     };
 
     this.getSongs = this.getSongs.bind(this);
@@ -75,7 +74,6 @@ class App extends Component {
       this.setState({
         songs: response.data
       });
-     // this.renderSongs(); <-- didn't need it.
     }).catch((error) =>{
       console.log(error);
     });
@@ -537,7 +535,8 @@ class App extends Component {
     return (
         <div className="App">
           <Header ronSwanson={this.state.ronSwanson} />
-          <div className="row main">
+          <div className="main">
+          {!this.state.currentSong ?
               <Home
                 songs={this.state.songs}
                 getSongs={this.getSongs}
@@ -545,9 +544,11 @@ class App extends Component {
                 setEditSongState={this.setEditSongState}
                 currentEditSong={this.state.currentEditSong}
                 setEditFalse={this.setEditFalse}
+                currentSong={this.state.currentSong}
                 setCurrentSong={this.setCurrentSong}
                 removeCurrentSong={this.removeCurrentSong}
               />
+              :
               <EditSong
                 songs={this.state.songs}
                 currentSong={this.state.currentSong}
@@ -571,8 +572,8 @@ class App extends Component {
                 toggleAudioStateTrue={this.toggleAudioStateTrue}
                 toggleAudioStateFalse={this.toggleAudioStateFalse}
                 nowPlaying={this.state.nowPlaying}
-              />
-        </div>
+              />}
+          </div>
         </div>
     );
   }

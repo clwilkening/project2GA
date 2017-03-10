@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-//import { Link } from 'react-router';
 import axios from 'axios';
 
 const propTypes = {
@@ -74,18 +73,12 @@ class Home extends Component {
           </div>
           <div className="row">
           <button className="rename col-sm-4" onClick={ () =>
-            this.handleClickEdit(key) }
-          >
-            Edit Name
-          </button>
-          <button className="buttons col-sm-4" key={song.title} onClick={ () => this.props.setCurrentSong(key) }
-          >
-            Go!
-          </button>
+            this.handleClickEdit(key)}>Edit Name</button>
+            <button className="buttons col-sm-4" key={song.title} onClick={ () => this.props.setCurrentSong(key) }>Go!</button>
           <button className="buttons col-sm-4" onClick={ () => { this.deleteSong(key)} }><span className="glyphicon glyphicon-trash"></span></button>
           </div>
         </div>
-        );
+        )
       //reverses the order of the array.
         songElements.reverse();
       };
@@ -104,8 +97,8 @@ class Home extends Component {
     if (!this.props.currentEditSong) {
       if(!this.props.edit) {
         content = (
-          <div>
-          <div className="col-sm-4">
+          <div className="container">
+          <div className="col-sm-6 col-sm-offset-3">
             {this.renderSongs()}
           </div>
           </div>
@@ -114,7 +107,7 @@ class Home extends Component {
     } else {
       content = (
         <div className="row">
-          <div className="col-sm-4 edit-title" key={key}>
+          <div className="col-sm-6 edit-title" key={key}>
             <input
               type="text"
               defaultValue={this.props.songs[this.props.currentEditSong].title}
@@ -196,23 +189,19 @@ class Home extends Component {
       <div>
         <div className="row">
         <input
-            className="col-lg-4 title-input"
+            className="col-sm-2 col-sm-offset-4 title-input"
             placeholder="Name your song!"
             onKeyPress={this.handleNewSongInput}
             ref="input"
         />
           <button
-            className="col-lg-4 create-title"
+            className="col-sm-2 create-title"
             onClick={() =>{this.createSongTitle(this.refs.input.value)}}
           >
             Create!
           </button>
-          <div className="col-lg-4">
-          </div>
         </div>
-        <div>
           {this.renderEditOrTitle()}
-        </div>
       </div>
     );
   };

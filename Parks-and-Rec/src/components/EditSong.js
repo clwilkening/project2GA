@@ -122,7 +122,7 @@ class EditSong extends Component {
       //console.log(currentSong)
       content = (
         //initial div has the song title, and an X for exiting.
-        <div className="col-sm-6 selected-container">
+        <div className="col-sm-6 col-sm-offset-3 selected-container">
           <div className="row">
             <div className="col-sm-6">
               <h3 className="current-song">{currentSong.title}</h3>
