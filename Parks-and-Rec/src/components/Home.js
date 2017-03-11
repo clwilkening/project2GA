@@ -107,7 +107,7 @@ class Home extends Component {
     } else {
       content = (
         <div className="row">
-          <div className="col-sm-6 edit-title" key={key}>
+          <div className="col-sm-6 col-sm-offset-3 edit-title" key={key}>
             <input
               type="text"
               defaultValue={this.props.songs[this.props.currentEditSong].title}
