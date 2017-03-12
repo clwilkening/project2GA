@@ -74,7 +74,7 @@ class Home extends Component {
           <div className="row">
           <button className="rename col-sm-4" onClick={ () =>
             this.handleClickEdit(key)}>Edit Name</button>
-            <button className="buttons col-sm-4" key={song.title} onClick={ () => this.props.setCurrentSong(key) }>Go!</button>
+            <button className="buttons col-sm-4" key={song.title} onClick={ () => this.props.setCurrentSong(key) }><span className="glyphicon glyphicon-music"></span></button>
           <button className="buttons col-sm-4" onClick={ () => { this.deleteSong(key)} }><span className="glyphicon glyphicon-trash"></span></button>
           </div>
         </div>
