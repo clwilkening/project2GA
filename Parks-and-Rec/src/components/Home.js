@@ -16,7 +16,7 @@ class Home extends Component {
     this.createSongTitle = this.createSongTitle.bind(this);
     this.renderSongs = this.renderSongs.bind(this);
     this.deleteSong = this.deleteSong.bind(this);
-    this.renderEditOrTitle = this.renderEditOrTitle.bind(this);
+    // this.renderEditOrTitle = this.renderEditOrTitle.bind(this);
   }
 
 //sets initial state of a song when it is created and posts to firebase
@@ -66,51 +66,15 @@ class Home extends Component {
     for(let key in this.props.songs) {
       let song = this.props.songs[key]
 
+      //if the the state matches the key, render the input box for editing.
+      this.props.currentEditSong === key ?
       songElements.push(
         <div className="song-name-container col-sm-12" key={key}>
           <div className="row col-sm-12">
-            <h4 className="col-sm-12 song-title">{song.title}</h4>
-          </div>
-          <div className="row">
-          <button className="rename col-sm-4" onClick={ () =>
-            this.handleClickEdit(key)}>Edit Name</button>
-            <button className="buttons col-sm-4" key={song.title} onClick={ () => this.props.setCurrentSong(key) }><span className="glyphicon glyphicon-music"></span></button>
-          <button className="buttons col-sm-4" onClick={ () => { this.deleteSong(key)} }><span className="glyphicon glyphicon-trash"></span></button>
-          </div>
-        </div>
-        )
-      //reverses the order of the array.
-        songElements.reverse();
-      };
-    return(
-      <div>
-        {songElements}
-      </div>
-    );
-  }
-
-//checks to see if the Edit Name button has been clicked. If it has, boolean will be true, and
-//runs renderSongs. If false, Input and button are shown.
-  renderEditOrTitle(key) {
-    let content;
-
-    if (!this.props.currentEditSong) {
-      if(!this.props.edit) {
-        content = (
-          <div className="container">
-          <div className="col-sm-6 col-sm-offset-3">
-            {this.renderSongs()}
-          </div>
-          </div>
-        );
-      };
-    } else {
-      content = (
-        <div className="row">
-          <div className="col-sm-6 col-sm-offset-3 edit-title" key={key}>
             <input
+              className="edit-title"
               type="text"
-              defaultValue={this.props.songs[this.props.currentEditSong].title}
+              defaultValue={song.title}
               ref="editSongInput"
               onKeyPress={(e) =>{this.handleClickEditEnter(e)}}
             />
@@ -121,10 +85,38 @@ class Home extends Component {
               Save Name
             </button>
           </div>
+          <div className="row">
+            <button className="rename col-sm-4" onClick={ () =>
+              this.handleClickEdit(key)}>Edit Name</button>
+              <button className="buttons col-sm-4" key={song.title} onClick={ () => this.props.setCurrentSong(key) }><span className="glyphicon glyphicon-music"></span></button>
+            <button className="buttons col-sm-4" onClick={ () => { this.deleteSong(key)} }><span className="glyphicon glyphicon-trash"></span></button>
+          </div>
         </div>
-      );
-    };
-    return content;
+        )
+      :
+      songElements.push(
+      <div className="song-name-container col-sm-12" key={key}>
+          <div className="row col-sm-12">
+            <h4 className="col-sm-12 song-title">{song.title}</h4>
+          </div>
+          <div className="row">
+          <button className="rename col-sm-4" onClick={ () =>
+            this.handleClickEdit(key)}>Edit Name</button>
+            <button className="buttons col-sm-4" key={song.title} onClick={ () => this.props.setCurrentSong(key) }><span className="glyphicon glyphicon-music"></span></button>
+          <button className="buttons col-sm-4" onClick={ () => { this.deleteSong(key)} }><span className="glyphicon glyphicon-trash"></span></button>
+          </div>
+        </div>
+      )
+      //reverses the order of the array.
+        songElements.reverse();
+      };
+    return(
+      <div className="container">
+        <div className="col-sm-6 col-sm-offset-3">
+          {songElements}
+        </div>
+      </div>
+    );
   }
 
 //completely removes a song from database
@@ -178,7 +170,7 @@ class Home extends Component {
       //set the new state
       this.props.setSongState(songs);
       //re render the song list
-      this.renderEditOrTitle();
+      this.renderSongs();
     }).catch((error) => {
       console.log(error);
     });
@@ -201,7 +193,7 @@ class Home extends Component {
             Create!
           </button>
         </div>
-          {this.renderEditOrTitle()}
+          {this.renderSongs()}
       </div>
     );
   };
