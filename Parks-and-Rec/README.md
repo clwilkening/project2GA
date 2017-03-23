@@ -1,12 +1,12 @@
-#Parks and Rec. CRUD Web App
+# Parks and Rec. CRUD Web App
 
-###Project 2 General Assembly - Chris Wilkening
+### Project 2 General Assembly - Chris Wilkening
 
 [Experience My Web App Here](https://build-pdbedvjxzo.now.sh)
 
 ![An image of the application](http://i.imgur.com/nrpFkYJ.png)
 
-####Technologies
+#### Technologies
 
 
 - React
@@ -70,7 +70,7 @@ Take a look:
                   removeCurrentSong={this.removeCurrentSong}
                 />  ```
 
-####My Approach
+#### My Approach
 
 I initially started with an idea an drew aspects of the plan on a whiteboard. Once I knew what direction to go in, I created a complete wireframe of the application. The wireframe goes through the user stories. I then added the users stories to a Trello board.
 
@@ -79,11 +79,11 @@ I initially started with an idea an drew aspects of the plan on a whiteboard. On
 
 My approach to coding was to follow the steps in my Trello board. I created one aspect of a component at a time, and didn't move on until it had proper functionality.
 
-####For the Future
+#### For the Future
 
 I would like to incorporate React Router to have a separate page to edit a song. I'd also like to give users the option to choose from different tv shows, artists, or genres. 
 
-#####Disclaimer
+##### Disclaimer
 I do not own any rights to the content from Park and Rec. This was intended for educational purposes.
 
 Written by Chris Wilkening.
