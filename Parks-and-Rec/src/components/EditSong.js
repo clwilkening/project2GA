@@ -134,7 +134,7 @@ class EditSong extends Component {
             <button
               className="x"
             //removes, does not delete
-            //spaces are added below between each section. Melody, Accompaniment, bass, percussion.
+            //spaces are added below between each section/row. Melody, Accompaniment, bass, percussion.
               onClick={() => this.props.removeCurrentSong()}>&times;
             </button>
             </div>
@@ -142,7 +142,7 @@ class EditSong extends Component {
           <div className="box-container">
             <h4 className="description">Melody</h4>
               <div
-                className={b1? "instruments col-sm-6 selected" : "instruments col-sm-6 "}
+                className={b1 ? "instruments col-sm-6 selected" : "instruments col-sm-6 "}
                 onClick={() => this.toggleBox1(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
               >
               <audio ref="audio1" src={ParksAndRecOboe} preload="auto"></audio>
@@ -150,7 +150,7 @@ class EditSong extends Component {
               </div>
 
               <div
-                className={b2? "instruments col-sm-6 selected" : "instruments col-sm-6"}
+                className={b2 ? "instruments col-sm-6 selected" : "instruments col-sm-6"}
                 onClick={() => this.toggleBox2(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
               >
               <audio ref="audio2" src={ParksAndRecTpt} preload="auto"></audio>
@@ -159,7 +159,7 @@ class EditSong extends Component {
 
             <h4 className="description">Accompaniment</h4>
             <div
-              className={b3? "instruments col-sm-6 selected" : "instruments col-sm-6"}
+              className={b3 ? "instruments col-sm-6 selected" : "instruments col-sm-6"}
               onClick={() => this.toggleBox3(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
             >
             <audio ref="audio3" src={ParksAndRecViolin} preload="auto"></audio>
@@ -167,7 +167,7 @@ class EditSong extends Component {
             </div>
 
             <div
-              className={b4? "instruments col-sm-6 selected" : "instruments col-sm-6"}
+              className={b4 ? "instruments col-sm-6 selected" : "instruments col-sm-6"}
               onClick={() => this.toggleBox4(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
             >
             <audio ref="audio4" src={ParksAndRecViola} preload="auto"></audio>
@@ -176,14 +176,14 @@ class EditSong extends Component {
 
           <h4 className="description">Bass</h4>
           <div
-            className={b5? "instruments col-sm-6 selected" : "instruments col-sm-6"}
+            className={b5 ? "instruments col-sm-6 selected" : "instruments col-sm-6"}
             onClick={() => this.toggleBox5(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
           >
           <audio ref="audio5" src={ParksAndRecCello} preload="auto"></audio>
             5: Cello
           </div>
           <div
-            className={b6? "instruments col-sm-6 selected" : "instruments col-sm-6"}
+            className={b6 ? "instruments col-sm-6 selected" : "instruments col-sm-6"}
             onClick={() => this.toggleBox6(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
           >
           <audio ref="audio6" src={ParksAndRecBass} preload="auto"></audio>
@@ -192,14 +192,14 @@ class EditSong extends Component {
 
           <h4 className="description">Percussion</h4>
           <div
-            className={b7? "instruments col-sm-6 selected" : "instruments col-sm-6"}
+            className={b7 ? "instruments col-sm-6 selected" : "instruments col-sm-6"}
             onClick={() => this.toggleBox7(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
           >
           <audio ref="audio7" src={ParksAndRecSnare} preload="auto"></audio>
             7: Snare
           </div>
           <div
-            className={b8? "instruments col-sm-6 selected" : "instruments col-sm-6"}
+            className={b8 ? "instruments col-sm-6 selected" : "instruments col-sm-6"}
             onClick={() => this.toggleBox8(key, title, b1, b2, b3, b4, b5, b6, b7, b8)}
           ><audio ref="audio8" src={ParksAndRecKit} preload="auto"></audio>
             8: Drums
@@ -226,75 +226,72 @@ class EditSong extends Component {
 //the toggle functions check to see whether or not to update the box to true or false.
 //it changes the boolean value, passing key, titile, and the booleans for each box.
   toggleBox1(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
-    console.log(this.props.songs.box1)
+    // console.log(this.props.songs.box1)
     if(this.props.songs[id].box1 === false) {
-      //this.props.toggleGetFalse1();
       this.props.box1True(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-    } else if(this.props.songs[id].box1 === true) {
-      this.props.box1False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-      // this.props.toggleGetTrue1();
-    };
+    } else if (this.props.songs[id].box1 === true) {
+      this.props.box1False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);    };
   }
 
   toggleBox2(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
-    console.log(this.props.songs.box2)
+    // console.log(this.props.songs.box2)
     if(this.props.songs[id].box2 === false) {
       this.props.box2True(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-    } else if(this.props.songs[id].box2 === true) {
+    } else if (this.props.songs[id].box2 === true) {
       this.props.box2False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
     };
   }
 
   toggleBox3(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
-    console.log(this.props.songs.box3)
+    // console.log(this.props.songs.box3)
     if(this.props.songs[id].box3 === false) {
       this.props.box3True(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-    } else if(this.props.songs[id].box3 === true) {
+    } else if (this.props.songs[id].box3 === true) {
       this.props.box3False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
     };
   }
 
   toggleBox4(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
-    console.log(this.props.songs.box4)
+    // console.log(this.props.songs.box4)
     if(this.props.songs[id].box4 === false) {
       this.props.box4True(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-    } else if(this.props.songs[id].box4 === true) {
+    } else if (this.props.songs[id].box4 === true) {
       this.props.box4False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
     };
   }
 
   toggleBox5(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
-    console.log(this.props.songs.box5)
+    // console.log(this.props.songs.box5)
     if(this.props.songs[id].box5 === false) {
       this.props.box5True(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-    } else if(this.props.songs[id].box5 === true) {
+    } else if (this.props.songs[id].box5 === true) {
       this.props.box5False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
     };
   }
 
   toggleBox6(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
-    console.log(this.props.songs.box6)
+    // console.log(this.props.songs.box6)
     if(this.props.songs[id].box6 === false) {
       this.props.box6True(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-    } else if(this.props.songs[id].box6 === true) {
+    } else if (this.props.songs[id].box6 === true) {
       this.props.box6False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
     };
   }
 
   toggleBox7(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
-    console.log(this.props.songs.box7)
+    // console.log(this.props.songs.box7)
     if(this.props.songs[id].box7 === false) {
       this.props.box7True(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-    } else if(this.props.songs[id].box7 === true) {
+    } else if (this.props.songs[id].box7 === true) {
       this.props.box7False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
     };
   }
 
   toggleBox8(id, title, b1, b2, b3, b4, b5, b6, b7, b8){
-    console.log(this.props.songs.box8)
+    // console.log(this.props.songs.box8)
     if(this.props.songs[id].box8 === false) {
       this.props.box8True(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
-    } else if(this.props.songs[id].box8 === true) {
+    } else if (this.props.songs[id].box8 === true) {
       this.props.box8False(id, title, b1, b2, b3, b4, b5, b6, b7, b8);
     };
   }

@@ -75,7 +75,7 @@ class App extends Component {
         songs: response.data
       });
     }).catch((error) =>{
-      console.log(error);
+      console.error(error);
     });
   }
 
@@ -331,7 +331,6 @@ class App extends Component {
       box7: b7,
       box8: b8,
     }
-
     axios({
       url: `/songs/${id}.json`,
       baseURL: 'https://parks-and-rec-82533.firebaseio.com/',
